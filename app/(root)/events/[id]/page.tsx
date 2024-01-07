@@ -53,7 +53,7 @@ const EventDetails = async ({
               </div>
             </div>
 
-            <CheckoutButton />
+            <CheckoutButton event={event}/>
             <div className="flex flex-col gap-5">
               <div className="flex gap-2 md:gap-3">
                 <Image
@@ -81,7 +81,7 @@ const EventDetails = async ({
                   width={32}
                   height={32}
                 />
-                <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
+                <p className="p-medium-16 lg:p-regular-20">{event.location}</p> 
               </div>
             </div>
             <div className="flex flex-col gap-2">
