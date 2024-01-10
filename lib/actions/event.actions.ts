@@ -119,8 +119,13 @@ export const getAllEvents = async ({
   try {
     await connectToDatabase();
 
-    const conditions = {};
-    const skipAmount = (Number(page) - 1) * limit;
+    const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {}
+    const categoryCondition = category ? await getCategoryByName(category) : null
+    const conditions = {
+      $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
+    }
+
+    const skipAmount = (Number(page) - 1) * limit
     const eventsQuery = Event.find(conditions)
       .sort({ createdAt: 'desc' })
       .skip(skipAmount)

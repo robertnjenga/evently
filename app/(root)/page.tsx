@@ -13,12 +13,12 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const category = (searchParams?.category as string) || '';
 
   const events = await getAllEvents({
-    query: '',
-    category: '',
-    page: 1,
+    query: searchText,
+    category,
+    page,
     limit: 6
   })
- 
+//  console.log(events)
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
@@ -61,8 +61,8 @@ export default async function Home({ searchParams }: SearchParamProps) {
           emptyStateSubtext="Come back later"
           collectionType="All_Events"
           limit={6}
-          page={1}
-          totalPages={2}
+          page={page}
+          totalPages={events?.totalPages}
         />
       </section>
     </>
